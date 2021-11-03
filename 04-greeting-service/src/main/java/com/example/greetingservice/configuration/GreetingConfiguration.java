@@ -1,4 +1,4 @@
-package configuration;
+package com.example.greetingservice.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties("greeting-service") //anotacao que determinar a configuracao do servico
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class GreetingConfiguration {
 
     private String greeting;

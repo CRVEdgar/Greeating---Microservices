@@ -2,8 +2,8 @@ package com.example.greetingservice.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.example.greetingservice.configuration.GreetingConfiguration;
 import com.example.greetingservice.model.Greeting;
-import configuration.GreetingConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
