@@ -1,6 +1,18 @@
+server:
+  port: 8080
+
+# propriedades do servidor de configuracao
 spring:
   application:
     name: greeting-service
+  config:
+    import:
+      - optional:configserver:http://localhost:8888/
+  cloud:
+    config:
+      profile: prod
+
+
 management:
   endpoints:
     web:
