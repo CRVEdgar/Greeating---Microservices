@@ -12,7 +12,7 @@ spring:
     config:
       profile: prod
 
-
+# propriedade de configuracao do nivel de exposicao dos endpoints da API
 management:
   endpoints:
     web:
