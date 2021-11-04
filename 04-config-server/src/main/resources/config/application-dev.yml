@@ -9,5 +9,5 @@ management:
           - '*'
 
 greeting-service:
-  greeting: "olá"
-  default-value: "mundo"
+  greeting: "Hello"
+  default-value: "World"
