@@ -24,10 +24,10 @@ public class CambioController {
 
     @GetMapping(value = "/{amount}/{from}/{to}")
     public Cambio getCambio(@PathVariable("amount") BigDecimal amount, @PathVariable("from") String from,
-            @PathVariable("to") String to
-            ){
+                            @PathVariable("to") String to
+    ) {
         var cambio = repository.findByFromAndTo(from, to);
-        if(cambio == null) throw new RuntimeException("Currency Unsupported");
+        if (cambio == null) throw new RuntimeException("Currency Unsupported");
 
         var port = environment.getProperty("local.server.port"); // recperando a porta da aplicação
 
