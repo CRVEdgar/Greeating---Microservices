@@ -1,6 +1,7 @@
 package com.example.bookservice.controller;
 
 import com.example.bookservice.model.Book;
+import com.example.bookservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,16 @@ public class BookController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private BookRepository repository;
+
     @GetMapping(value = "/{id}/{currency}")
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency){
+        var book = repository.findById(id).orElseThrow( () -> new RuntimeException("Livro nao encontrado"));
+
         var port =  environment.getProperty("local.server.port");
 
-        return new Book(1L, "Edgar", "Docker", new Date(), Double.valueOf(13.7), currency, port);
+        book.setEnvironment(port);
+        return book;
     }
 }
