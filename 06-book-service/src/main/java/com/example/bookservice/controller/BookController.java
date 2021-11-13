@@ -26,7 +26,7 @@ public class BookController {
     private BookRepository repository;
 
     @Autowired
-    private CambioProxy proxy;
+    private CambioProxy proxy; //injeção para acessar o serviço via FeignClient
 
     @GetMapping(value = "/{id}/{currency}")
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency){

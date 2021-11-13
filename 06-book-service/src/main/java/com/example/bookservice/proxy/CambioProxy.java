@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 
-@FeignClient(name = "cambio-service")
+@FeignClient(name = "cambio-service") //endpoint do cliente/microserviço a ser acessado
 public interface CambioProxy {
 
     @GetMapping(value = "cambio-service/{amount}/{from}/{to}")

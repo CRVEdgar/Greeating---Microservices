@@ -11,7 +11,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/cambio_service?useTimezone=true&serverTimezone=UTC
     username: postgres
-    password: headbangerpf27
+    password: postgres
     jpa:
       hibernate:
         ddl-auto: create
