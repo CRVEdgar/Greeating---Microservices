@@ -15,16 +15,19 @@ public class ApiGatewayConfiguration {
 
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
-        Function<PredicateSpec, Buildable<Route>> function =
-                p -> p.path("/get")
+
+        return builder.routes()
+                .route(p -> p.path("/get")
                         .filters(
                                 f -> f.addRequestHeader("NomeCabecalho", "Valor")
                                         .addRequestParameter("Parametro", "Valor")
                         )
-                        .uri("http://httpbin.org:80");
-
-        return builder.routes()
-                .route(function)
+                        .uri("http://httpbin.org:80"))
+                // caminhos de acesso ao loadbalance do Eureka
+                .route(p -> p.path("/cambio-service/**")
+                        .uri("lb://cambio-service")) // nome do serviço registrado no Eureka
+                .route(p -> p.path("/book-service/**")
+                        .uri("lb://book-service")) // nome do serviço registrado no Eureka
                 .build();
     }
 }

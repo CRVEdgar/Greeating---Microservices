@@ -4,6 +4,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+#    configuracao de verificacao de instancia ativa - tempo
+    healthcheck:
+      enabled: true
+      lease:
+        duration: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
 spring:
   application:
     name: cambio-service
