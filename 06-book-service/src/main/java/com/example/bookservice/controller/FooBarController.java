@@ -1,5 +1,6 @@
 package com.example.bookservice.controller;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,15 @@ public class FooBarController {
         logger.info("MESSAGE: Request for foo-bar is received!");
         var response = new RestTemplate()
                 .getForEntity("http://localhost:8080/foo-bar", String.class);
+        return response.getBody();
+    }
+
+    @GetMapping("/foo-bar/cctbrk")
+    @CircuitBreaker(name = "default", fallbackMethod = "fallbackMethod") // fallbackMethod = "fallbackMethod" c/c String fallbackMethod(Exception e)
+    public String foobarCircuitBreak(){
+        logger.info("MESSAGE: Request for foo-bar is received!");
+        var response = new RestTemplate()
+                .getForEntity("http://localhost:8080/foo-bar/cctbrk", String.class);
         return response.getBody();
     }
 
