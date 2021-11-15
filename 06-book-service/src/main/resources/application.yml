@@ -17,7 +17,9 @@ resilience4j:
   retry:
     instances:
       foo-bar:
-        max-attempts: 5
+        max-attempts: 5 #quantidade de chamdas ao endpoint
+        wait-duration: 1s #tempo de espera até tentar a proxima requisição
+        enable-exponential-backoff: true #tempo exponencial para tentativa das requisicoes
 spring:
   application:
     name: book-service
