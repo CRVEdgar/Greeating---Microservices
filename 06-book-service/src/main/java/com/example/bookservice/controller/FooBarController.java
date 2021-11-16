@@ -1,6 +1,8 @@
 package com.example.bookservice.controller;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +37,20 @@ public class FooBarController {
         return response.getBody();
     }
 
-    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    @GetMapping("/foo-bar/rtlmt")
+    @RateLimiter(name = "default")
+    public String foobarReteLimiter(){
+        logger.info("MESSAGE: Request for foo-bar is received! - WITH RateLimite");
+        return "MESSAGE: Limitadas as requisições por periodo! - WITH RateLimite";
+    }
+
+    @GetMapping("/foo-bar/bkhd")
+    @Bulkhead(name = "default")
+    public String foobarReteLimiter(){
+        logger.info("MESSAGE: Request for foo-bar is received! - WITH Bulkhead");
+        return "MESSAGE: Limitadas as requisições por periodo! - WITH Bulkhead";
+    }
+
     private String fallbackMethod(Exception e){
         //metodo sera invocado apos a tentativa de N chamadas ao endpoint /foo-bar
         // captura a exception e executa this metodo

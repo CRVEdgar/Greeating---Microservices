@@ -14,6 +14,15 @@ eureka:
       leaseExpirationDurationInSeconds: 2
 #    configurando a quantidade de tentativas de acesso ao servico
 resilience4j:
+  ratelimiter:
+    instances:
+      default:
+        limit-for-period: 2 #quantidade de requisicoes
+        limit-refresh-period: 10s #tempo (dentro de 10s sera rlz apenas 2 requisições
+  bulkhead:
+    instances:
+      default:
+        max-concurrent-calls: 10
   retry:
     instances:
       foo-bar:
