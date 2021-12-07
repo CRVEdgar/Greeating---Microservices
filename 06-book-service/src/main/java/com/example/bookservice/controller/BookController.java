@@ -4,6 +4,8 @@ import com.example.bookservice.model.Book;
 import com.example.bookservice.proxy.CambioProxy;
 import com.example.bookservice.repository.BookRepository;
 import com.example.bookservice.response.Cambio;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.HashMap;
 
+@Tag(name = "Book Endpoint") //LOCAL DE ACESSO - localhost:8000/swagger-ui.html
 @RestController
 @RequestMapping(value = "book-service")
 public class BookController {
@@ -28,6 +31,7 @@ public class BookController {
     @Autowired
     private CambioProxy proxy; //injeção para acessar o serviço via FeignClient
 
+    @Operation(summary = "busca um livro pelo seu id")
     @GetMapping(value = "/{id}/{currency}")
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency){
         var book = repository.findById(id).orElseThrow( () -> new RuntimeException("Livro nao encontrado"));

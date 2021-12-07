@@ -4,6 +4,8 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@Tag(name = "Foo Bar TAG")
 @RestController
 @RequestMapping(value = "book-service")
 public class FooBarController {
 
     private Logger logger =  LoggerFactory.getLogger(FooBarController.class);
 
+    @Operation(summary = "busca um livro pelo seu id")
     @GetMapping("/foo-bar")
     @Retry(name = "foo-bar", fallbackMethod = "fallbackMethod") // name c/c instances:foo-bar: [.yml] // fallbackMethod = "fallbackMethod" c/c String fallbackMethod(Exception e)
     public String foobar(){
@@ -46,7 +50,7 @@ public class FooBarController {
 
     @GetMapping("/foo-bar/bkhd")
     @Bulkhead(name = "default")
-    public String foobarReteLimiter(){
+    public String foobarBulkhead(){
         logger.info("MESSAGE: Request for foo-bar is received! - WITH Bulkhead");
         return "MESSAGE: Limitadas as requisições por periodo! - WITH Bulkhead";
     }
