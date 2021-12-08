@@ -53,3 +53,7 @@ spring:
       schemas: book_service
       user: postgres
       password: headbangerpf27
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: book-service/v3/api-docs

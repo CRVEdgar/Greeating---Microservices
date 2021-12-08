@@ -32,3 +32,6 @@ spring:
       schemas: cambio_service
       user: postgres
       password: headbangerpf27
+springdoc:
+  api-docs:
+    path: cambio-service/v3/api-docs
