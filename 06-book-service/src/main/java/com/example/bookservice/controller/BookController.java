@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.HashMap;
 
-@Tag(name = "Book Endpoint") //LOCAL DE ACESSO - localhost:8000/swagger-ui.html
+@Tag(name = "Book Endpoint") //LOCAL DE ACESSO - localhost:8100/swagger-ui.html
 @RestController
 @RequestMapping(value = "book-service")
 public class BookController {

@@ -7,9 +7,19 @@ eureka:
 spring:
   application:
     name: api-gateway
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
-#          lower-case-service-id: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          #lower-case-service-id: true
+#          configurando o redirecionamento da rota do loadBalance
+      routes:
+      - id: cambio-service
+        uri: lb://cambio-service
+        predicates:
+        - Path=/cambio-service/**
+      - id: book-service
+        uri: lb://book-service
+        predicates:
+        - Path=/book-service/**
